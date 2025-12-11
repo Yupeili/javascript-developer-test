@@ -21,8 +21,8 @@ const parseResponse = (str) => {
 const getArnieQuotes = async (urls) => {
   const results = await Promise.all(urls.map(url=> httpGet(url)));
   return results.map(res => res.status === 200 ? ({
-    'Arnie Quote': JSON.parse(res.body).message
-  }) : ({ 'FAILURE': JSON.parse(res.body).message }))
+    'Arnie Quote': parseResponse(res.body)
+  }) : ({ 'FAILURE': parseResponse(res.body) }))
 };
 
 module.exports = {
